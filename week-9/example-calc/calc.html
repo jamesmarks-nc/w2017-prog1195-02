@@ -11,28 +11,28 @@
   <div id="calculator">
     <div><input type="text" id="currentNumber"></div>
     <div>
-      <button onclick="handleButtonClick('7')">7</button>
-      <button onclick="handleButtonClick('8')">8</button>
-      <button onclick="handleButtonClick('9')">9</button>
-      <button onclick="handleButtonClick('/')">/</button>
+      <button onclick="handleDigitClick('7')">7</button>
+      <button onclick="handleDigitClick('8')">8</button>
+      <button onclick="handleDigitClick('9')">9</button>
+      <button onclick="handleOperatorClick('/')">/</button>
     </div>
     <div>
-      <button onclick="handleButtonClick('4')">4</button>
-      <button onclick="handleButtonClick('5')">5</button>
-      <button onclick="handleButtonClick('6')">6</button>
+      <button onclick="handleDigitClick('4')">4</button>
+      <button onclick="handleDigitClick('5')">5</button>
+      <button onclick="handleDigitClick('6')">6</button>
       <button onclick="handleButtonClick('*')">*</button>
     </div>
     <div>
-      <button onclick="handleButtonClick('1')">1</button>
-      <button onclick="handleButtonClick('2')">2</button>
-      <button onclick="handleButtonClick('3')">3</button>
-      <button onclick="handleButtonClick('-')">-</button>
+      <button onclick="handleDigitClick('1')">1</button>
+      <button onclick="handleDigitClick('2')">2</button>
+      <button onclick="handleDigitClick('3')">3</button>
+      <button onclick="handleOperatorClick('-')">-</button>
     </div>
     <div>
-      <button onclick="handleButtonClick('0')">0</button>
-      <button onclick="handleButtonClick('.')">.</button>
-      <button onclick="handleButtonClick('=')">=</button>
-      <button onclick="handleButtonClick('+')">+</button>
+      <button onclick="handleDigitClick('0')">0</button>
+      <button onclick="handleDotClick()">.</button>
+      <button onclick="handleOperatorClick('=')">=</button>
+      <button onclick="handleOperatorClick('+')">+</button>
     </div>
     <div id="peek"></div>
   </div>
