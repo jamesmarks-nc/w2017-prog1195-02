@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Scientific Calculator</title>
+</head>
+<body>
+  
+  <div id="calculator">
+    <div><input type="text" id="currentNumber"></div>
+    <div>
+      <button onclick="handleButtonClick('7')">7</button>
+      <button onclick="handleButtonClick('8')">8</button>
+      <button onclick="handleButtonClick('9')">9</button>
+      <button onclick="handleButtonClick('/')">/</button>
+    </div>
+    <div>
+      <button onclick="handleButtonClick('4')">4</button>
+      <button onclick="handleButtonClick('5')">5</button>
+      <button onclick="handleButtonClick('6')">6</button>
+      <button onclick="handleButtonClick('*')">*</button>
+    </div>
+    <div>
+      <button onclick="handleButtonClick('1')">1</button>
+      <button onclick="handleButtonClick('2')">2</button>
+      <button onclick="handleButtonClick('3')">3</button>
+      <button onclick="handleButtonClick('-')">-</button>
+    </div>
+    <div>
+      <button onclick="handleButtonClick('0')">0</button>
+      <button onclick="handleButtonClick('.')">.</button>
+      <button onclick="handleButtonClick('=')">=</button>
+      <button onclick="handleButtonClick('+')">+</button>
+    </div>
+    <div id="peek"></div>
+  </div>
+
+  <script src="calc.js"></script>
+  <noscript>Silly Web-surfer. Scripts are awesome! Turn on Javascript</noscript>
+</body>
+</html>
