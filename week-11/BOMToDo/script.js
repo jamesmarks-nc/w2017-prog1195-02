@@ -54,7 +54,8 @@ function listToDos() {
     }
 
     // When this is clicked, run the toggleComplete() function
-    newListItem.onclick = toggleComplete;
+    newListItem.addEventListener('click', toggleComplete);
+    // or...  newListItem.onclick = toggleComplete; 
 
     // add the new todo item to the parent ToDo list UL element on the page.
     outputList.appendChild(newListItem);
