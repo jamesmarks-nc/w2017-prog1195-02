@@ -1,6 +1,10 @@
 
 const departments = new Array(
-  { code: 'ACCT', name: 'Accounting', budget: 200000,},
+  { 
+    code: 'ACCT', 
+    name: 'Accounting', 
+    budget: 200000,
+  },
   {
     code: 'ISYS',
     name: 'Information Systems',
