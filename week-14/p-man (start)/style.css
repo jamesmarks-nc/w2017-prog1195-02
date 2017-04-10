@@ -1,0 +1,9 @@
+#score-board, #game-controls {
+  display: block;
+  text-align: center;
+}
+#pacman-game {
+  border: 1px solid black;
+  margin: 0 auto;
+  display: block;
+}
