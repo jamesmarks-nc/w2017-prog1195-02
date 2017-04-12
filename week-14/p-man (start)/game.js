@@ -22,7 +22,7 @@ let gridWidth = 20;
 let gridHeight = 30;
 
 // Player will stay the same as long as page exists.
-const player = { x: 1, y: 1, score: 0, isGameOver: false };
+const player = { x: 1, y: 1, score: 0, lives: 3, isGameOver: false };
 // Enemies will be reinitialized each time a level is loaded.
 let enemies = []; // array of { x: int, y: int, d: char } -> d is direction in ("U", "D", "L", "R")
 
@@ -91,7 +91,9 @@ function loadLevel(level) {
   spawnRate = level.spawnRate;
   player.x = level.playerStart.x;
   player.y = level.playerStart.y;
-  // reset player gameover tracking
+  // reset player gameover tracking, score and number of lives.
+  player.score = 0;
+  player.lives = 3;
   player.isGameOver = false;
   // reset enemies
   enemies = [];
@@ -165,12 +167,17 @@ function tryMovePlayer(direction) {
   // figure out the value at that square
   var nextSquareData = getSquareData(nextSquare.x, nextSquare.y);
 
+  // if it's a good square (food or nothing), then move there.
   if(nextSquareData === NOTHING || nextSquareData === FOOD) {
     movePlayer(nextSquare);
+    // if there's an enemy, tough love - game over
+    if(enemyIsAt(nextSquare.x, nextSquare.y)) {
+      die("Walked into enemy");
+    }
+  } else {
+    // else if its a wall, don't change position, but trigger a move enemies anyhow (to get "bump" effect)
+    movePlayer(player);
   }
-  // if there's an enemy, tough love - game over
-  // else if it's a good square (food or nothing), then move there.
-  // else if its a wall, don't change position, but trigger a move enemies anyhow (to get "bump" effect)
 
 }
 
@@ -182,6 +189,7 @@ function movePlayer(position) { // position must have an x and a y property
   if(getSquareData(player.x, player.y) === FOOD) {
     updatePlayerScore(player.score + 10); // Points for eating 
     setSquareData(player.x, player.y, NOTHING);
+    checkWin();
   }
 
   // move all the enemies
@@ -227,6 +235,7 @@ function gameOver(how) {
 function checkWin() {
   // check if any food is left. if not, we won this level. (Intro to Array.prototype.filter())
   // TODO... create a "food" array of only FOOD items on the map
+  var food = mapData.filter(d => d === FOOD);
   if(food.length === 0) {
     winLevel();
   }
@@ -238,8 +247,15 @@ function winLevel() {
 
   // if there's a next level, indicate the player can continue
   // otherwise show a game winner message.
+  if(LEVEL.nextLevel) {
+    drawText("Complete", "continue?");
+    continueButton.disabled = false;
+  } else {
+    drawText("Game Over", "You win!");
+  }
 
   // mark the level as complete (use player.isGameOver)
+  player.isGameOver = true;
 
 }
 
@@ -257,13 +273,30 @@ function drawText(title, subtitle) {
 
 }
 
+function continueClick() {
+  // Get all food into a new array.
+  var food = mapData.filter(function(data) { return data === FOOD; })
+  // If the player has not eaten all the food (food length > 0) continue this level
+  if(food.length !== 0) {
+    enemies = [];
+    player.x = LEVEL.playerStart.x;
+    player.y = LEVEL.playerStart.y;
+    drawBoard();
+  
+  // otherwise, go to next level.
+  } else {
+    nextLevel();
+  }
+}
+
 // start next level
 function nextLevel() {
-
+  // TODO: if there is no next level, don't go anywhere.
+  loadLevel(LEVEL.nextLevel);
 }
 // restart from first level
 function restart() {
-
+  loadLevel(level0);
 }
 
 // For kicks, we're going to take an index instead of an enemy object.
@@ -298,17 +331,16 @@ function moveEnemy(enemyIndex) {
         break;
     }
     // get the data at that square
-    var data = getSquareData(nextSquare.x, nextSquare.y);
+    nextSquareData = getSquareData(nextSquare.x, nextSquare.y);
     // make sure the enemy is allowed to move there
-    if(data !== FOOD && data !== NOTHING) {
+    if(nextSquareData !== FOOD && nextSquareData !== NOTHING) {
       // if not, randomize which direction the enemy will go next
       var directions = getAvailableDirections(enemy.x, enemy.y);
-      console.log(directions);
       var index = Math.floor(Math.random() * directions.length);
       enemy.d = directions[index];
     } else if(playerIsAt(nextSquare.x, nextSquare.y)) {
       // if the player is there, it's game over time.
-      gameOver("Enemy ate player");
+      die("Enemy ate player");
     }
     
   } while(nextSquareData !== NOTHING && nextSquareData !== FOOD); // Until its a square the enemy is allowed to walk on.
@@ -316,6 +348,17 @@ function moveEnemy(enemyIndex) {
   // once we have a good square, apply the position to the enemy in question.
   enemy.x = nextSquare.x;
   enemy.y = nextSquare.y;
+}
+
+function die(reason) {
+  player.lives -= 1
+  if(player.lives === 0) {
+    gameOver(reason);
+  } else {
+    continueButton.disabled = false;
+    restartButton.disabled = false;
+    drawText("You died", "continue?");
+  }
 }
 
 // check if player is on a given square
@@ -367,7 +410,7 @@ document.onkeydown = function(e) {
 
 // html button even handlers.
 restartButton.onclick = restart;
-continueButton.onclick = nextLevel;
+continueButton.onclick = continueClick;
 
 // load the first level >>> loadLevel()
-loadLevel(level0);
+loadLevel(level1);
