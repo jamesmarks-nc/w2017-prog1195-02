@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Test Review - Built-in Objects</title>
+  <link rel="stylesheet" type="text/css" href="style/main.css">
+</head>
+<body onload="window_onload()">
+  <h1>Built-in Objects</h1>
+  <div class="section">
+    <h2>Date Manipulation</h2>
+    <div>Output: <input type="text" id="dateOutput"></div>
+    <div><input type='button' id='showToday' value="Show Today"></div>
+    <div><input type='button' id='showFormattedDate' value="Show Formatted"></div>
+    <div><input type='button' id='showNextWeek' value="Show Next Week"></div>
+  </div>
+  <div class="section">
+    <h2>Name Manipulation</h2>
+    <div>Your Full Name: <input type="text" id="fullName" placeholder="Full name (ie. James Marks)"></div>
+    <div><input type="button" id="splitName" value="Split Name"></div>
+    <div><input type="text" id="firstName" readonly placeholder="First Name (Output)"></div>
+    <div><input type="text" id="lastName" readonly placeholder="Last Name (Output)"></div>
+  </div>
+  <div class="section">
+    <h2>&quot;Fun&quot; with Math</h2>
+    <div><input type="text" id="number1" placeholder="Number 1"></div>
+    <div><input type="text" id="number2" placeholder="Number 2"></div>
+    <div><input type="button" value="Add" id="addButton"></div>
+    <div><input type="button" value="Multiply" id="multButton"></div>
+    <div><input type="button" value="Square Root" id="rootButton"></div>
+    <div><input type="button" value="Remainder" id="remainderButton"></div>
+    <div><input type="button" value="PI!" id="piButton"></div>
+  </div>
+  <script src="built-in.js"></script>
+</body>
+</html>
