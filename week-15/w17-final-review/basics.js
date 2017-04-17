@@ -4,6 +4,8 @@
  * Test 3 - Review (Back to Basics)
  */
 
+var globalVariable = "global"; // It's not in a function.
+
 function window_onload() {
   // when attaching an event handler, we do not use the invocation operator (parenthesis) 
   // because we want to reference the function to be used when the event is triggered, not immediately.
@@ -28,7 +30,7 @@ function window_onload() {
 
 function logParameter(param1) {
   // Original variable name is out of scope:
-  // ---> console.log("Original: " + originalParamVariable); // This would cause an error
+  /// ====> console.log("Original: " + originalParamVariable); // This would cause an error
   // But param1 is a copy or reference to that variable (depending on data type)
   console.log("Parameterized: " + param1);
 }
@@ -40,7 +42,7 @@ function doDataStuff_click() {
     as long as you start with /* and end with */
 
   // literal: string, number, boolean, array, object
-  console.log("a");
+  console.log("a"); // 'a'
   console.log(1);
   console.log(true);
   console.log(["value 1", "value2"]);
@@ -58,8 +60,8 @@ function doDataStuff_click() {
   // We should only use var when initially creating a variable. 
   // We should not (and can not in most other languages) use the declaration keyword to redeclare
   // the same variable name again somewhere else in the same scope.
-  a = "b" // not 'var a = "b"' because we did 'var a = "a"' above.
-  one = 2 // not 'var one = 2' because we did 'var a = "a"' above.
+  a = "b"; // not 'var a = "b"' because we did 'var a = "a"' above.
+  one = 2; // not 'var one = 2' because we did 'var a = "a"' above.
   // ... etc.
 
 }
@@ -140,7 +142,7 @@ function doArrayStuff_click() {
 
   // Length tells you how many elements exist in your array. This will always be one more than the last element currently in your array.
   console.log(a1.length);
-  console.log(a1[length - 1]);
+  console.log(a1[a1.length - 1]);
 
   // to add an element to the end of an array:
   a1.push("value 3");
