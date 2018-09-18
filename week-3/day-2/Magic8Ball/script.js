@@ -2,8 +2,14 @@
 
 function askThe8Ball() {
 
+  
+
     var radioButtons = document.getElementsByName("question");
     var selectedValue = "";
+
+    for(var radio of radioButtons) {
+      console.log(radio.value + " -> checked: " + radio.checked);
+    }
 
     for(var i=0; i < radioButtons.length; i = i + 1) {
         var currentRadio = radioButtons[i];
